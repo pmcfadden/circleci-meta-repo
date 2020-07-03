@@ -12,7 +12,7 @@ workflows:
       - get-triggered:
           filters:
             branches:
-              ignore: /*/
+              ignore: /.*/
 jobs:
   build:
     docker:
