@@ -1,0 +1,28 @@
+version: 2.1
+workflows:
+  version: 2
+  build-and-package:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: /master/
+  example-job:
+    jobs:
+      - get-triggered
+jobs:
+  build:
+    docker:
+      - image: 'circleci/python:latest'
+    steps:
+      - checkout
+      - run: echo 'hello world'
+  get-triggered:
+    docker:
+      - image: 'circleci/python:latest'
+    parameters:
+      example-string:
+        type: string
+        default: 'my-string'
+    steps:
+      - run: echo << parameters.example-string >>
